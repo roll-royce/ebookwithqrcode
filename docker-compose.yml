@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    environment:
+      - VITE_SUPABASE_URL=${VITE_SUPABASE_URL}
+      - VITE_SUPABASE_ANON_KEY=${VITE_SUPABASE_ANON_KEY}
+    depends_on:
+      - supabase
+
+  supabase:
+    image: supabase/postgres:latest
+    container_name: supabase
+    environment:
+      POSTGRES_PASSWORD: supabase_password
+      POSTGRES_USER: supabase_user
+      POSTGRES_DB: supabase_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - supabase-data:/var/lib/postgresql/data
+
+  storage:
+    image: supabase/storage:latest
+    container_name: supabase-storage
+    environment:
+      - SUPABASE_URL=http://supabase:5432
+      - SUPABASE_ANON_KEY=${VITE_SUPABASE_ANON_KEY}
+    depends_on:
+      - supabase
+
+volumes:
+  supabase-data:

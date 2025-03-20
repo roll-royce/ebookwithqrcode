@@ -7,10 +7,18 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
+# Node.js dependencies
+node_modules/
+
+# Build output
+dist/
 dist-ssr
-*.local
+build/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
 
 # Editor directories and files
 .vscode/*
@@ -22,3 +30,30 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.vscode/
+.idea/
+*.swp
+
+# TypeScript
+*.tsbuildinfo
+
+# Supabase
+.supabase/
+supabase/.temp/
+supabase/config.json
+
+# Docker
+docker-compose.override.yml
+*.pid
+
+# Lint and cache files
+.eslintcache
+.cache/
+
+# Coverage reports
+coverage/
+*.lcov
+
+# Temporary files
+*.tmp
+*.temp
